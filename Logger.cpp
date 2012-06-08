@@ -61,5 +61,25 @@ void Logger::printLocalTime()
     time(&currentTime);
     timeinfo = localtime(&currentTime);
     
-    cerr << asctime(timeinfo) << " ";
+    cerr << timeinfo->tm_year + 1900 << "-";
+    
+    if(timeinfo->tm_mon + 1 < 10)
+        cerr << "0"; 
+    cerr << timeinfo->tm_mon + 1 << "-";
+    
+    if(timeinfo->tm_mday < 10)
+        cerr << "0";
+    cerr << timeinfo->tm_mday << " ";
+    
+    if(timeinfo->tm_hour < 10)
+        cerr << "0";
+    cerr << timeinfo->tm_hour << ":";
+    
+    if(timeinfo->tm_min < 10)
+        cerr << "0";
+    cerr << timeinfo->tm_min << ":";
+            
+    if(timeinfo->tm_sec < 10)
+        cerr << "0";
+    cerr << timeinfo->tm_sec << " ";
 }
