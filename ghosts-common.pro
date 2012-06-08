@@ -14,8 +14,10 @@ DESTDIR = ../lib
 DEFINES += GHOSTSCOMMON_LIBRARY
 
 SOURCES += \
-    Logger.cpp
+    Logger.cpp \
+    Environment.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
-    Logger.h
+    Logger.h \
+    Environment.h
