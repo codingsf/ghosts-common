@@ -15,9 +15,11 @@ DEFINES += GHOSTSCOMMON_LIBRARY
 
 SOURCES += \
     Logger.cpp \
-    Environment.cpp
+    Environment.cpp \
+    Random.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
     Logger.h \
-    Environment.h
+    Environment.h \
+    Random.h
