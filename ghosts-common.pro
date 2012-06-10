@@ -17,11 +17,13 @@ SOURCES += \
     Logger.cpp \
     Environment.cpp \
     Random.cpp \
-    protocol/Packet.cpp
+    protocol/Packet.cpp \
+    protocol/DisconnectPacket.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
     Logger.h \
     Environment.h \
     Random.h \
-    protocol/Packet.h
+    protocol/Packet.h \
+    protocol/DisconnectPacket.h

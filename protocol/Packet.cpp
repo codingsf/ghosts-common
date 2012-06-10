@@ -1,6 +1,6 @@
 #include "Packet.h"
 
-Packet::Packet(unsigned char t) :
+Packet::Packet(char t) :
     m_type(t)
 {
 }
@@ -9,7 +9,7 @@ Packet::~Packet()
 {
 }
 
-unsigned char Packet::type() const
+char Packet::type() const
 {
     return m_type;
 }
