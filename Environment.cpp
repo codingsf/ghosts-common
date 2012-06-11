@@ -30,6 +30,9 @@ bool Environment::load(const std::string &filename)
         string line;
         getline(file, line);
         
+        if(line.length() == 0 || line.at(0) == '#')
+            continue;
+        
         size_t delimiterPosition = line.rfind("=");
         
         if(delimiterPosition == string::npos)
