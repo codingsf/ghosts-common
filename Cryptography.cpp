@@ -4,8 +4,11 @@
 #include <openssl/pem.h>
 #include <openssl/rsa.h>
 #include <openssl/bio.h>
+#include <openssl/err.h>
 
 #include "StringUtils.h"
+
+#include <iostream>
 
 using namespace std;
 
@@ -33,8 +36,9 @@ string Cryptography::encrypt(const string &message, unsigned char *key, int leng
     RSA *rsa;
     
     BIO *bio = BIO_new_mem_buf(key, length);
-    rsa = PEM_read_bio_RSAPublicKey(bio, &rsa, NULL, NULL);
-    BIO_free(bio);
+    PEM_read_bio_RSAPublicKey(bio, &rsa, NULL, NULL);
+    
+    cout << ERR_error_string(ERR_get_error(), NULL) << endl;
     
     unsigned char *result = new unsigned char[RSA_size(rsa)];
     
@@ -42,7 +46,7 @@ string Cryptography::encrypt(const string &message, unsigned char *key, int leng
                                            (const unsigned char *)message.c_str(),
                                            result,
                                            rsa, RSA_PKCS1_PADDING);
-    
+    BIO_free(bio);
     RSA_free(rsa);
     
     string r = StringUtils::bytesToString(result, encryptedSize);

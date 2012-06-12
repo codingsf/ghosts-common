@@ -6,7 +6,7 @@
 class FileUtils
 {
 public:
-    unsigned char *readFile(const std::string &filename, int &length);
+    static unsigned char *readFile(const std::string &filename, int &length);
 };
 
 #endif // FILEUTILS_H
