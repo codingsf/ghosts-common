@@ -18,7 +18,9 @@ SOURCES += \
     Environment.cpp \
     Random.cpp \
     protocol/Packet.cpp \
-    protocol/DisconnectPacket.cpp
+    protocol/DisconnectPacket.cpp \
+    Cryptography.cpp \
+    StringUtils.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -26,4 +28,6 @@ HEADERS +=\
     Environment.h \
     Random.h \
     protocol/Packet.h \
-    protocol/DisconnectPacket.h
+    protocol/DisconnectPacket.h \
+    Cryptography.h \
+    StringUtils.h
