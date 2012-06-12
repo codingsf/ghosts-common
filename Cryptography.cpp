@@ -74,3 +74,25 @@ string Cryptography::decrypt(unsigned char *data, int dataLength, unsigned char 
     return r;
 }
 
+unsigned char *Cryptography::extractPublicKey(unsigned char *key, int length, int &pkeyLen)
+{
+    BIO *bio = BIO_new(BIO_s_mem());
+    
+    RSA *rsa;
+    
+    BIO *keyBio = BIO_new_mem_buf(key, length);
+    rsa = PEM_read_bio_RSAPublicKey(keyBio, &rsa, NULL, NULL);
+    BIO_free(keyBio);
+    
+    PEM_write_bio_RSAPublicKey(bio, rsa);
+    RSA_free(rsa);
+    
+    pkeyLen = BIO_ctrl_pending(bio);
+    
+    unsigned char *result = new unsigned char[pkeyLen];
+    BIO_read(bio, result, pkeyLen);
+    BIO_free(bio);
+    
+    return result;
+}
+

@@ -10,6 +10,8 @@ public:
     
     static std::string encrypt(const std::string &message, unsigned char *key, int length);
     static std::string decrypt(unsigned char *data, int dataLength, unsigned char *key, int keyLength);
+    
+    static unsigned char *extractPublicKey(unsigned char *key, int length, int &pkeyLen);
 };
 
 #endif // CRYPTOGRAPHY_H

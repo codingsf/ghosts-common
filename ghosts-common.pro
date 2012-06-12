@@ -20,7 +20,8 @@ SOURCES += \
     protocol/Packet.cpp \
     protocol/DisconnectPacket.cpp \
     Cryptography.cpp \
-    StringUtils.cpp
+    StringUtils.cpp \
+    FileUtils.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -30,4 +31,5 @@ HEADERS +=\
     protocol/Packet.h \
     protocol/DisconnectPacket.h \
     Cryptography.h \
-    StringUtils.h
+    StringUtils.h \
+    FileUtils.h
