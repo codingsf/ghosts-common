@@ -11,6 +11,8 @@ TEMPLATE = lib
 
 DESTDIR = ../lib
 
+LIBS += -lcrypto++
+
 DEFINES += GHOSTSCOMMON_LIBRARY
 
 SOURCES += \
@@ -20,8 +22,7 @@ SOURCES += \
     protocol/Packet.cpp \
     protocol/DisconnectPacket.cpp \
     Cryptography.cpp \
-    StringUtils.cpp \
-    FileUtils.cpp
+    StringUtils.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -31,5 +32,4 @@ HEADERS +=\
     protocol/Packet.h \
     protocol/DisconnectPacket.h \
     Cryptography.h \
-    StringUtils.h \
-    FileUtils.h
+    StringUtils.h

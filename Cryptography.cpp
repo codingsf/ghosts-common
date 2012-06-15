@@ -1,102 +1,80 @@
 #include "Cryptography.h"
 
-#include <openssl/evp.h>
-#include <openssl/pem.h>
-#include <openssl/rsa.h>
-#include <openssl/bio.h>
-#include <openssl/err.h>
+#include <crypto++/sha.h>
+#include <crypto++/rsa.h>
+#include <crypto++/osrng.h>
 
 #include "StringUtils.h"
 
 #include <iostream>
 
 using namespace std;
+using namespace CryptoPP;
 
 string Cryptography::digest(const string &message)
 {
-    EVP_MD_CTX *context;
-    const EVP_MD *md = EVP_sha512();
+    SHA512 algorithm;
     
-    unsigned char digest[EVP_MAX_MD_SIZE];
-    unsigned int length;
+    byte *digest = new byte[algorithm.DigestSize()];
     
-    context = EVP_MD_CTX_create();
-    EVP_DigestInit_ex(context, md, NULL);
+    algorithm.CalculateDigest(digest, (const byte *)message.c_str(), message.length());
     
-    EVP_DigestUpdate(context, message.c_str(), message.length());
+    string result = StringUtils::bytesToString(digest, algorithm.DigestSize());
     
-    EVP_DigestFinal_ex(context, digest, &length);
-    EVP_MD_CTX_destroy(context);
-    
-    return StringUtils::bytesToString(digest, length);
-}
-
-string Cryptography::encrypt(const string &message, unsigned char *key, int length)
-{
-    RSA *rsa;
-    
-    BIO *bio = BIO_new_mem_buf(key, length);
-    PEM_read_bio_RSAPublicKey(bio, &rsa, NULL, NULL);
-    
-    cout << ERR_error_string(ERR_get_error(), NULL) << endl;
-    
-    unsigned char *result = new unsigned char[RSA_size(rsa)];
-    
-    int encryptedSize = RSA_public_encrypt(message.length(), 
-                                           (const unsigned char *)message.c_str(),
-                                           result,
-                                           rsa, RSA_PKCS1_PADDING);
-    BIO_free(bio);
-    RSA_free(rsa);
-    
-    string r = StringUtils::bytesToString(result, encryptedSize);
-    
-    delete [] result;
-    
-    return r;
-}
-
-string Cryptography::decrypt(unsigned char *data, int dataLength, unsigned char *key, int keyLength)
-{
-    RSA *rsa;
-    
-    BIO *bio = BIO_new_mem_buf(key, keyLength);
-    rsa = PEM_read_bio_RSAPrivateKey(bio, &rsa, NULL, NULL);
-    BIO_free(bio);
-    
-    unsigned char *result = new unsigned char[RSA_size(rsa)];
-    
-    int decryptedSize = RSA_private_decrypt(dataLength, data, result, rsa, RSA_PKCS1_PADDING);
-    
-    RSA_free(rsa);
-    
-    result[decryptedSize] = 0;
-    string r = string((const char *)result);
-    
-    delete [] result;
-    
-    return r;
-}
-
-unsigned char *Cryptography::extractPublicKey(unsigned char *key, int length, int &pkeyLen)
-{
-    BIO *bio = BIO_new(BIO_s_mem());
-    
-    RSA *rsa;
-    
-    BIO *keyBio = BIO_new_mem_buf(key, length);
-    rsa = PEM_read_bio_RSAPublicKey(keyBio, &rsa, NULL, NULL);
-    BIO_free(keyBio);
-    
-    PEM_write_bio_RSAPublicKey(bio, rsa);
-    RSA_free(rsa);
-    
-    pkeyLen = BIO_ctrl_pending(bio);
-    
-    unsigned char *result = new unsigned char[pkeyLen];
-    BIO_read(bio, result, pkeyLen);
-    BIO_free(bio);
+    delete [] digest;
     
     return result;
 }
+
+string Cryptography::encrypt(const string &message, const string &key)
+{
+    RSA::PublicKey publicKey;
+    AutoSeededRandomPool rng;
+    
+    StringSource keySource(key, true);
+    publicKey.Load(keySource);
+    
+    string result;
+    
+    RSAES_OAEP_SHA_Encryptor encryptor(publicKey);
+    
+    StringSource(message, true,
+                 new PK_EncryptorFilter(rng, encryptor, new StringSink(result)));
+    
+    return result;
+}
+
+string Cryptography::decrypt(const string &message, const string &key)
+{
+    RSA::PrivateKey privateKey;
+    AutoSeededRandomPool rng;
+    
+    StringSource keySource(key, true);
+    privateKey.Load(keySource);
+    
+    string result;
+    
+    RSAES_OAEP_SHA_Decryptor decryptor(privateKey);
+    
+    StringSource(message, true, new PK_DecryptorFilter(rng, decryptor, new StringSink(result)));
+    
+    return result;
+}
+
+void Cryptography::generateRSAKey(int bits, string &privateKey, string &publicKey)
+{
+    AutoSeededRandomPool rng;
+    privateKey = publicKey = "";
+    
+    InvertibleRSAFunction parameters;
+    parameters.GenerateRandomWithKeySize(rng, bits);
+    
+    RSA::PrivateKey privKey(parameters);
+    RSA::PublicKey pubKey(parameters);
+    
+    StringSink privateKeySink(privateKey), publicKeySink(publicKey);
+    privKey.Save(privateKeySink);
+    pubKey.Save(publicKeySink);
+}
+
 
