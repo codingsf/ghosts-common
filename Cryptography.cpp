@@ -3,6 +3,7 @@
 #include <crypto++/sha.h>
 #include <crypto++/rsa.h>
 #include <crypto++/osrng.h>
+#include <crypto++/files.h>
 
 #include "StringUtils.h"
 
@@ -10,6 +11,19 @@
 
 using namespace std;
 using namespace CryptoPP;
+
+// helpers
+void parsePrivateKey(const string &key, RSA::PrivateKey &privateKey)
+{
+    StringSource keySource(key, true);
+    privateKey.Load(keySource);  
+}
+
+void parsePublicKey(const string &key, RSA::PublicKey &publicKey)
+{
+    StringSource keySource(key, true);
+    publicKey.Load(keySource);
+}
 
 string Cryptography::digest(const string &message)
 {
@@ -26,13 +40,14 @@ string Cryptography::digest(const string &message)
     return result;
 }
 
+
+
 string Cryptography::encrypt(const string &message, const string &key)
 {
     RSA::PublicKey publicKey;
     AutoSeededRandomPool rng;
     
-    StringSource keySource(key, true);
-    publicKey.Load(keySource);
+    parsePublicKey(key, publicKey);
     
     string result;
     
@@ -49,8 +64,7 @@ string Cryptography::decrypt(const string &message, const string &key)
     RSA::PrivateKey privateKey;
     AutoSeededRandomPool rng;
     
-    StringSource keySource(key, true);
-    privateKey.Load(keySource);
+    parsePrivateKey(key, privateKey);
     
     string result;
     
@@ -75,6 +89,29 @@ void Cryptography::generateRSAKey(int bits, string &privateKey, string &publicKe
     StringSink privateKeySink(privateKey), publicKeySink(publicKey);
     privKey.Save(privateKeySink);
     pubKey.Save(publicKeySink);
+}
+
+void Cryptography::saveRSAKey(const string &filename, const string &privateKey)
+{
+    RSA::PrivateKey pKey;
+    
+    parsePrivateKey(privateKey, pKey);
+    FileSink fs(filename.c_str());
+    pKey.Save(fs);
+}
+
+void Cryptography::loadRSAKey(const string &filename, string &privateKey, string &publicKey)
+{
+    RSA::PrivateKey pKey;
+    
+    FileSource fs(filename.c_str(), true);
+    pKey.Load(fs);
+    
+    RSA::PublicKey pubKey(pKey);
+    
+    StringSink ss(privateKey), ssPub(publicKey);
+    pKey.Save(ss);
+    pubKey.Save(ssPub);
 }
 
 
