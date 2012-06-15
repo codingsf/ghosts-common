@@ -1,9 +1,11 @@
 #ifndef STRINGUTILS_H
 #define STRINGUTILS_H
 
+#include "ghosts-common_global.h"
+
 #include <string>
 
-class StringUtils
+class GHOSTSCOMMONSHARED_EXPORT StringUtils
 {
 public:
     static std::string bytesToString(const unsigned char *data, int length);

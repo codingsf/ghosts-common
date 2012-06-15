@@ -25,11 +25,14 @@ public:
     
     char type() const;
     
-    virtual char *serialize(int &len) const = 0;
+    char *serialize(int &len) const;
     virtual void read(const char *data, unsigned int len) = 0;
     
 protected:
     char m_type;
+    
+    virtual void serializeInternal(char *buffer) const = 0;
+    virtual int length() const = 0;
 
 };
 

@@ -19,24 +19,17 @@ void UsernamePacket::setUsername(const std::string &username)
     m_username = username;
 }
 
-char *UsernamePacket::serialize(int &len) const
-{
-    len = 9 + m_username.length();
-    
-    char *result = new char[len];
-    char *buffer = result;
-    
-    saveInt(buffer, len);
-    
-    buffer += 4;
-    
-    buffer[0] = m_type;
-    saveString(buffer + 1, m_username);
-    
-    return result;
-}
-
 void UsernamePacket::read(const char *data, unsigned int /*len*/)
 {
     m_username = readString(data);
+}
+
+void UsernamePacket::serializeInternal(char *buffer) const
+{
+    saveString(buffer, m_username);
+}
+
+int UsernamePacket::length() const
+{
+    return 4 + m_username.length();
 }

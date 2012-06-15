@@ -16,6 +16,23 @@ char Packet::type() const
     return m_type;
 }
 
+char *Packet::serialize(int &len) const
+{
+    len = length() + 5;
+            
+    char *result = new char[len];
+    char *buffer = result;
+    
+    saveInt(buffer, len);
+    buffer += 4;
+    buffer[0] = m_type;
+    buffer += 1;
+    
+    serializeInternal(buffer);
+    
+    return result;
+}
+
 void Packet::saveInt(char *buffer, int number)
 {
     char *bufNum = (char *)&number;

@@ -1,9 +1,11 @@
 #ifndef ERRORPACKET_H
 #define ERRORPACKET_H
 
+#include "../ghosts-common_global.h"
+
 #include "Packet.h"
 
-class ErrorPacket : public Packet
+class GHOSTSCOMMONSHARED_EXPORT ErrorPacket : public Packet
 {
 public:
     static const char Type = 70;
@@ -14,8 +16,11 @@ public:
     void setMessage(const std::string &message);
     std::string message() const;
     
-    virtual char *serialize(int &len) const;
     virtual void read(const char *data, unsigned int len);
+    
+protected:
+    virtual void serializeInternal(char *buffer) const;
+    virtual int length() const;
     
 private:
     std::string m_message;

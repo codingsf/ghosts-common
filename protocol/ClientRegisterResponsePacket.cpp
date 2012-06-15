@@ -15,25 +15,17 @@ void ClientRegisterResponsePacket::setHashedPassword(const std::string &hashedPa
     m_hashedPassword = hashedPassword;
 }
 
-char *ClientRegisterResponsePacket::serialize(int &len) const
-{
-    len = 9 + m_hashedPassword.length();
-    
-    char *result = new char[len];
-    char *buffer = result;
-    
-    saveInt(buffer, len);
-    buffer += 4;
-    
-    buffer[0] = Type;
-    buffer += 1;
-    
-    saveString(buffer, m_hashedPassword);
-    
-    return result;
-}
-
 void ClientRegisterResponsePacket::read(const char *data, unsigned int /*len*/)
 {
     m_hashedPassword = readString(data);
+}
+
+void ClientRegisterResponsePacket::serializeInternal(char *buffer) const
+{
+    saveString(buffer, m_hashedPassword);
+}
+
+int ClientRegisterResponsePacket::length() const
+{
+    return 4 + m_hashedPassword.length();
 }

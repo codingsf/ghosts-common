@@ -5,15 +5,16 @@ DisconnectPacket::DisconnectPacket() :
 {
 }
 
-char *DisconnectPacket::serialize(int &len) const
-{
-    char *result = new char[1];
-    len = 1;
-    result[0] = Type;
-    
-    return result;
-}
-
 void DisconnectPacket::read(const char */*data*/, unsigned int /*len*/)
 {
+}
+
+void DisconnectPacket::serializeInternal(char */*buffer*/) const
+{
+    
+}
+
+int DisconnectPacket::length() const
+{
+    return 0;
 }

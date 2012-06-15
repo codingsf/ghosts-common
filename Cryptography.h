@@ -1,9 +1,11 @@
 #ifndef CRYPTOGRAPHY_H
 #define CRYPTOGRAPHY_H
 
+#include "ghosts-common_global.h"
+
 #include <string>
 
-class Cryptography
+class GHOSTSCOMMONSHARED_EXPORT Cryptography
 {
 public:
     static std::string digest(const std::string &message);

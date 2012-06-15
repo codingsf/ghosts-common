@@ -1,9 +1,11 @@
 #ifndef CLIENTREGISTERRESPONSEPACKET_H
 #define CLIENTREGISTERRESPONSEPACKET_H
 
+#include "../ghosts-common_global.h"
+
 #include "Packet.h"
 
-class ClientRegisterResponsePacket : public Packet
+class GHOSTSCOMMONSHARED_EXPORT ClientRegisterResponsePacket : public Packet
 {
 public:
     static const char Type = 4;
@@ -13,8 +15,11 @@ public:
     std::string hashedPassword() const;
     void setHashedPassword(const std::string &hashedPassword);
     
-    virtual char *serialize(int &len) const;
     virtual void read(const char *data, unsigned int len);
+    
+protected:
+    virtual void serializeInternal(char *buffer) const;
+    virtual int length() const;    
     
 private:
     std::string m_hashedPassword;
