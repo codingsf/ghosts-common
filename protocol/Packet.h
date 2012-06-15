@@ -10,6 +10,15 @@ class GHOSTSCOMMONSHARED_EXPORT Packet
 public:
     static const char Invalid = -1;
     static const int MaximalPacketSize = 3072;
+
+    static void saveInt(char *buffer, int number);
+    static int readInt(const char *buffer);
+    
+    static void saveFloat(char *buffer, float number);
+    static float readFloat(const char *buffer);
+    
+    static void saveString(char *buffer, const std::string &text);
+    static std::string readString(const char *buffer);
     
     Packet(char t = Invalid);
     virtual ~Packet();
@@ -21,15 +30,7 @@ public:
     
 protected:
     char m_type;
-    
-    void saveInt(char *buffer, int number) const;
-    int readInt(const char *buffer);
-    
-    void saveFloat(char *buffer, float number) const;
-    float readFloat(const char *buffer);
-    
-    void saveString(char *buffer, const std::string &text) const;
-    std::string readString(const char *buffer);
+
 };
 
 #endif // PACKET_H

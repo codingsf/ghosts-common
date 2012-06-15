@@ -22,7 +22,11 @@ SOURCES += \
     protocol/Packet.cpp \
     protocol/DisconnectPacket.cpp \
     Cryptography.cpp \
-    StringUtils.cpp
+    StringUtils.cpp \
+    protocol/UsernamePacket.cpp \
+    protocol/ErrorPacket.cpp \
+    protocol/ServerRegisterChallengePacket.cpp \
+    protocol/ClientRegisterResponsePacket.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -32,4 +36,8 @@ HEADERS +=\
     protocol/Packet.h \
     protocol/DisconnectPacket.h \
     Cryptography.h \
-    StringUtils.h
+    StringUtils.h \
+    protocol/UsernamePacket.h \
+    protocol/ErrorPacket.h \
+    protocol/ServerRegisterChallengePacket.h \
+    protocol/ClientRegisterResponsePacket.h

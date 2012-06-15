@@ -120,7 +120,7 @@ int Environment::toInt(const string &value)
     return buffer;
 }
 
-int Environment::toFloat(const string &value)
+float Environment::toFloat(const string &value)
 {
     float buffer;
     

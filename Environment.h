@@ -10,7 +10,7 @@ class GHOSTSCOMMONSHARED_EXPORT Environment
 {
 public:
     static int toInt(const std::string &value);
-    static int toFloat(const std::string &value);
+    static float toFloat(const std::string &value);
     
     static bool init(const std::string &filename);
     static Environment *instance();

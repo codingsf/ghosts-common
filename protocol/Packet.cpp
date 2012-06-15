@@ -16,7 +16,7 @@ char Packet::type() const
     return m_type;
 }
 
-void Packet::saveInt(char *buffer, int number) const
+void Packet::saveInt(char *buffer, int number)
 {
     char *bufNum = (char *)&number;
     
@@ -36,7 +36,7 @@ int Packet::readInt(const char *buffer)
     return result;
 }
 
-void Packet::saveFloat(char *buffer, float number) const
+void Packet::saveFloat(char *buffer, float number)
 {
     char *bufNum = (char *)&number;
     
@@ -56,7 +56,7 @@ float Packet::readFloat(const char *buffer)
     return result;
 }
 
-void Packet::saveString(char *buffer, const string &text) const
+void Packet::saveString(char *buffer, const string &text)
 {
     saveInt(buffer, text.length());
     
