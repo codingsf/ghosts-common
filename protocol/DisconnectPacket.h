@@ -1,7 +1,7 @@
 #ifndef DISCONNECTPACKET_H
 #define DISCONNECTPACKET_H
 
-#include "ghosts-common_global.h"
+#include "../ghosts-common_global.h"
 
 #include "Packet.h"
 
