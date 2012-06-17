@@ -19,7 +19,7 @@ void UsernamePacket::setUsername(const std::string &username)
     m_username = username;
 }
 
-void UsernamePacket::read(const char *data, unsigned int /*len*/)
+void UsernamePacket::read(const char *data)
 {
     m_username = readString(data);
 }

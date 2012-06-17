@@ -5,7 +5,7 @@ DisconnectPacket::DisconnectPacket() :
 {
 }
 
-void DisconnectPacket::read(const char */*data*/, unsigned int /*len*/)
+void DisconnectPacket::read(const char * /*buffer*/)
 {
 }
 

@@ -20,13 +20,16 @@ public:
     static void saveString(char *buffer, const std::string &text);
     static std::string readString(const char *buffer);
     
+    static void saveBool(char *buffer, bool value);
+    static bool readBool(const char *buffer);
+    
     Packet(char t = Invalid);
     virtual ~Packet();
     
     char type() const;
     
     char *serialize(int &len) const;
-    virtual void read(const char *data, unsigned int len) = 0;
+    virtual void read(const char *data) = 0;
     
 protected:
     char m_type;

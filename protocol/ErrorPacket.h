@@ -16,7 +16,7 @@ public:
     void setMessage(const std::string &message);
     std::string message() const;
     
-    virtual void read(const char *data, unsigned int len);
+    virtual void read(const char *data);
     
 protected:
     virtual void serializeInternal(char *buffer) const;

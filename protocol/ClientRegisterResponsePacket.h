@@ -15,7 +15,7 @@ public:
     std::string hashedPassword() const;
     void setHashedPassword(const std::string &hashedPassword);
     
-    virtual void read(const char *data, unsigned int len);
+    virtual void read(const char *data);
     
 protected:
     virtual void serializeInternal(char *buffer) const;

@@ -26,7 +26,7 @@ void ServerRegisterChallengePacket::setSalt(const std::string &salt)
     m_salt = salt;
 }
 
-void ServerRegisterChallengePacket::read(const char *data, unsigned int /*len*/)
+void ServerRegisterChallengePacket::read(const char *data)
 {
     m_publicKey = readString(data);
     m_salt = readString(data + (4 + m_publicKey.length()));

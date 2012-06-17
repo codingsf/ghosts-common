@@ -26,7 +26,9 @@ SOURCES += \
     protocol/UsernamePacket.cpp \
     protocol/ErrorPacket.cpp \
     protocol/ServerRegisterChallengePacket.cpp \
-    protocol/ClientRegisterResponsePacket.cpp
+    protocol/ClientRegisterResponsePacket.cpp \
+    protocol/PlayerPacket.cpp \
+    protocol/PlayerListPacket.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -40,4 +42,6 @@ HEADERS +=\
     protocol/UsernamePacket.h \
     protocol/ErrorPacket.h \
     protocol/ServerRegisterChallengePacket.h \
-    protocol/ClientRegisterResponsePacket.h
+    protocol/ClientRegisterResponsePacket.h \
+    protocol/PlayerPacket.h \
+    protocol/PlayerListPacket.h

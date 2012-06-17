@@ -15,7 +15,7 @@ void ClientRegisterResponsePacket::setHashedPassword(const std::string &hashedPa
     m_hashedPassword = hashedPassword;
 }
 
-void ClientRegisterResponsePacket::read(const char *data, unsigned int /*len*/)
+void ClientRegisterResponsePacket::read(const char *data)
 {
     m_hashedPassword = readString(data);
 }

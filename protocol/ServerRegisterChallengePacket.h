@@ -18,7 +18,7 @@ public:
     void setPublicKey(const std::string &publicKey);
     void setSalt(const std::string &salt);
     
-    virtual void read(const char *data, unsigned int len);
+    virtual void read(const char *data);
 
 protected:
     virtual void serializeInternal(char *buffer) const;

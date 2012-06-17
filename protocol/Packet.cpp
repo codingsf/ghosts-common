@@ -95,3 +95,13 @@ string Packet::readString(const char *buffer)
     
     return result;
 }
+
+void Packet::saveBool(char *buffer, bool value)
+{
+    *buffer = (value?1:0);
+}
+
+bool Packet::readBool(const char *buffer)
+{
+    return (*buffer) != 0;
+}

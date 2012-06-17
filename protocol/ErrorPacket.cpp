@@ -20,7 +20,7 @@ std::string ErrorPacket::message() const
     return m_message;
 }
 
-void ErrorPacket::read(const char *data, unsigned int /*len*/)
+void ErrorPacket::read(const char *data)
 {
     m_message = readString(data);
 }

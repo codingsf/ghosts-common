@@ -16,7 +16,7 @@ public:
     std::string username() const;
     void setUsername(const std::string &username);
     
-    virtual void read(const char *data, unsigned int len);
+    virtual void read(const char *data);
     
 protected:
     virtual void serializeInternal(char *buffer) const;
