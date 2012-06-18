@@ -1,7 +1,7 @@
 #include "PlayerPacket.h"
 
 PlayerPacket::PlayerPacket(const std::string &username, float rating, bool playing) :
-    m_username(username), m_rating(rating), m_playing(playing)
+    Packet(Type), m_username(username), m_rating(rating), m_playing(playing)
 {
 }
 

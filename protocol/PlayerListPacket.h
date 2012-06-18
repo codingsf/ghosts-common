@@ -11,6 +11,8 @@
 class GHOSTSCOMMONSHARED_EXPORT PlayerListPacket : public Packet
 {
 public:
+    static const char Type = 6;
+    
     PlayerListPacket();
     ~PlayerListPacket();
     

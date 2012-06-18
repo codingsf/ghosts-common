@@ -34,3 +34,13 @@ char Random::character()
 {
     return characters.at(rand()%characters.length());
 }
+
+std::string Random::string(int length)
+{
+    std::string result = "";
+    
+    for(int i = 0; i < length; i++)
+        result.append(1, character());
+    
+    return result;
+}

@@ -2,7 +2,8 @@
 
 using namespace std;
 
-PlayerListPacket::PlayerListPacket()
+PlayerListPacket::PlayerListPacket() :
+    Packet(Type)
 {
 }
 

@@ -8,6 +8,8 @@
 class GHOSTSCOMMONSHARED_EXPORT PlayerPacket : public Packet
 {
 public:
+    static const char Type = 5;
+    
     PlayerPacket(const std::string &username = "", float rating = 1000.0, bool playing = false);
     
     std::string username() const;
