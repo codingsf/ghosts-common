@@ -31,7 +31,9 @@ SOURCES += \
     protocol/PlayerListPacket.cpp \
     protocol/ChatPacket.cpp \
     protocol/GameInvitationPacket.cpp \
-    protocol/InvitationResponsePacket.cpp
+    protocol/InvitationResponsePacket.cpp \
+    protocol/ServerLoginChallengePacket.cpp \
+    protocol/ClientLoginResponsePacket.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -50,4 +52,6 @@ HEADERS +=\
     protocol/PlayerListPacket.h \
     protocol/ChatPacket.h \
     protocol/GameInvitationPacket.h \
-    protocol/InvitationResponsePacket.h
+    protocol/InvitationResponsePacket.h \
+    protocol/ServerLoginChallengePacket.h \
+    protocol/ClientLoginResponsePacket.h
