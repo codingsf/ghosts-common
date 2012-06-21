@@ -33,7 +33,8 @@ SOURCES += \
     protocol/GameInvitationPacket.cpp \
     protocol/InvitationResponsePacket.cpp \
     protocol/ServerLoginChallengePacket.cpp \
-    protocol/ClientLoginResponsePacket.cpp
+    protocol/ClientLoginResponsePacket.cpp \
+    protocol/WelcomePacket.cpp
 
 HEADERS +=\
         ghosts-common_global.h \
@@ -54,4 +55,5 @@ HEADERS +=\
     protocol/GameInvitationPacket.h \
     protocol/InvitationResponsePacket.h \
     protocol/ServerLoginChallengePacket.h \
-    protocol/ClientLoginResponsePacket.h
+    protocol/ClientLoginResponsePacket.h \
+    protocol/WelcomePacket.h
