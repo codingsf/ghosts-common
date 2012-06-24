@@ -8,7 +8,7 @@
 class GHOSTSCOMMONSHARED_EXPORT ServerLoginChallengePacket : public Packet
 {
 public:
-    static const char Type = 9;
+    static const char Type = 12;
     
     ServerLoginChallengePacket(const std::string &salt = "", const std::string &random = "");
     

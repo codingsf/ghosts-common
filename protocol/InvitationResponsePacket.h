@@ -10,7 +10,7 @@ class GHOSTSCOMMONSHARED_EXPORT InvitationResponsePacket : public Packet
 public:
     static const char Type = 9;
     
-    InvitationResponsePacket(const std::string &username, const std::string &invitationId, bool accepted = false);
+    InvitationResponsePacket(const std::string &username = "", const std::string &invitationId = "", bool accepted = false);
     
     std::string username() const;
     std::string invitationId() const;

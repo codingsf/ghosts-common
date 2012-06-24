@@ -10,7 +10,7 @@ class GHOSTSCOMMONSHARED_EXPORT ClientLoginResponsePacket : public Packet
 public:
     static const char Type = 10;
     
-    ClientLoginResponsePacket(const std::string &response);
+    ClientLoginResponsePacket(const std::string &response = "");
     
     std::string response() const;
     
