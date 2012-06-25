@@ -16,9 +16,6 @@ public:
     float rating() const;
     bool playing() const;
     
-    void serializeExternal(char *buffer) const;
-    int lengthExternal() const;
-    
     virtual void read(const char *data);
     
 protected:

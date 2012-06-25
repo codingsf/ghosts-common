@@ -20,16 +20,6 @@ bool PlayerPacket::playing() const
     return m_playing;
 }
 
-void PlayerPacket::serializeExternal(char *buffer) const
-{
-    serializeInternal(buffer);
-}
-
-int PlayerPacket::lengthExternal() const
-{
-    return length();
-}
-
 void PlayerPacket::read(const char *data)
 {
     const char *buf = data;
