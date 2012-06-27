@@ -5,6 +5,33 @@
 
 #include <string>
 
+class GHOSTSCOMMONSHARED_EXPORT UtfString
+{
+public:
+    UtfString(const char *text);
+    UtfString(const std::string &text);
+    UtfString(const std::wstring &text);
+    UtfString(const unsigned int *codes, unsigned int length);
+    
+    UtfString(const UtfString &other);
+    
+    ~UtfString();
+    
+    std::string toString() const;
+    std::wstring toWString() const;
+    char *toCharArray() const;
+    
+    unsigned int at(unsigned int i) const;
+    
+    unsigned int length() const;
+    
+    UtfString &operator=(const UtfString &other);
+    
+private:
+    unsigned int m_length;
+    unsigned int *m_characters;
+};
+
 class GHOSTSCOMMONSHARED_EXPORT Packet
 {
 public:
@@ -22,6 +49,15 @@ public:
     
     static void saveBool(char *buffer, bool value);
     static bool readBool(const char *buffer);
+    
+    static void saveWString(char *buffer, const std::wstring &text);
+    static std::wstring readWString(const char *buffer);
+    
+    static void saveWChar(char *buffer, wchar_t character);
+    static wchar_t readWChar(const char *buffer);
+    
+    static void saveUtfString(char *buffer, const UtfString &text);
+    static UtfString readUtfString(const char *buffer);
     
     Packet(char t = Invalid);
     virtual ~Packet();

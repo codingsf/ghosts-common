@@ -10,10 +10,10 @@ class GHOSTSCOMMONSHARED_EXPORT ChatPacket : public Packet
 public:
     static const char Type = 7;
     
-    ChatPacket(const std::string &username = "", const std::string &message = "");
+    ChatPacket(const std::string &username = "", const std::wstring &message = L"");
     
     std::string username() const;
-    std::string message() const;
+    std::wstring message() const;
     
     virtual void read(const char *data);
     
@@ -22,7 +22,8 @@ protected:
     virtual int length() const;
     
 private:
-    std::string m_username, m_message;
+    std::string m_username;
+    std::wstring m_message;
 };
 
 #endif // CHATPACKET_H

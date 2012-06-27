@@ -10,9 +10,9 @@ class GHOSTSCOMMONSHARED_EXPORT WelcomePacket : public Packet
 public:
     static const char Type = 11;
     
-    WelcomePacket(const std::string &welcomeMessage = "");
+    WelcomePacket(const std::wstring &welcomeMessage = L"");
     
-    std::string welcomeMessage() const;
+    std::wstring welcomeMessage() const;
     
     virtual void read(const char *data);
     
@@ -21,7 +21,7 @@ protected:
     virtual int length() const;
     
 private:
-    std::string m_welcomeMessage;
+    std::wstring m_welcomeMessage;
 };
 
 #endif // WELCOMEPACKET_H

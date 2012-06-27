@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ChatPacket::ChatPacket(const string &username, const string &message) :
+ChatPacket::ChatPacket(const string &username, const wstring &message) :
     Packet(Type), m_username(username), m_message(message)
 {
 }
@@ -12,7 +12,7 @@ string ChatPacket::username() const
     return m_username;
 }
 
-string ChatPacket::message() const
+wstring ChatPacket::message() const
 {
     return m_message;
 }
@@ -23,7 +23,7 @@ void ChatPacket::read(const char *data)
     m_username = readString(buf);
     buf += 4 + m_username.length();
     
-    m_message = readString(buf);
+    m_message = readWString(buf);
 }
 
 void ChatPacket::serializeInternal(char *buffer) const
@@ -32,10 +32,10 @@ void ChatPacket::serializeInternal(char *buffer) const
     saveString(buf, m_username);
     buf += 4 + m_username.length();
     
-    saveString(buf, m_message);
+    saveWString(buf, m_message);
 }
 
 int ChatPacket::length() const
 {
-    return 8 + m_username.length() + m_message.length();
+    return 8 + m_username.length() + 2*m_message.length();
 }
